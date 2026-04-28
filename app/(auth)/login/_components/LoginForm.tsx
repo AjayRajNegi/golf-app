@@ -46,7 +46,6 @@ export default function LoginForm() {
       const result = await loginWithEmailAction(email, password);
 
       if (!result.success) {
-        console.log(result.error);
         toast.error(result.error);
         return;
       }
@@ -126,15 +125,6 @@ export default function LoginForm() {
           </Button>
         </div>
       </CardContent>
-
-      <button
-        onClick={() => {
-          console.log("Heel");
-          toast.success("Hello");
-        }}
-      >
-        button
-      </button>
     </Card>
   );
 }
