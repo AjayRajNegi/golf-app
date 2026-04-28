@@ -9,14 +9,23 @@ import {
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { createUserCharityWhileSignup } from "@/app/actions/charity.actions";
 
 interface Props {
   plan: "MONTHLY" | "YEARLY";
   userName: string;
   userEmail: string;
+  charityPercent: number;
+  charityId: string;
 }
 
-export function SubscriptionButton({ plan, userName, userEmail }: Props) {
+export function SubscriptionButton({
+  plan,
+  userName,
+  userEmail,
+  charityPercent,
+  charityId,
+}: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -57,6 +66,12 @@ export function SubscriptionButton({ plan, userName, userEmail }: Props) {
           try {
             await verifyAndActivateSubscription(response, userId);
             toast.success("Payment successfull!!");
+            await createUserCharityWhileSignup(
+              userId,
+              charityId,
+              charityPercent,
+            );
+            toast.success("Charity updated successfully!!");
             router.push("/dashboard");
           } catch {
             toast.error("Something went wrong.");
