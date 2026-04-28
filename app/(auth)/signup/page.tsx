@@ -11,6 +11,5 @@ export default async function LoginPage() {
   if (session) {
     redirect("/");
   }
-  console.log(session);
   return <SignupForm />;
 }

@@ -10,11 +10,6 @@ export async function createSubscriptionOrder(
   plan: "MONTHLY" | "YEARLY",
   userId: string,
 ) {
-  console.log("KEY_ID present:", !!process.env.RAZORPAY_KEY_ID);
-  console.log("KEY_SECRET present:", !!process.env.RAZORPAY_KEY_SECRET);
-  console.log("KEY_ID prefix:", process.env.RAZORPAY_KEY_ID?.slice(0, 12));
-  console.log("Hello");
-
   try {
     const amount = PLAN_PRICES[plan];
     const order = await razorpay.orders.create({

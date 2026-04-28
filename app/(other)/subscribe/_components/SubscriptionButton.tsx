@@ -14,7 +14,7 @@ interface Props {
   userEmail: string;
 }
 
-export function EnrollmentButton({ plan, userName, userEmail }: Props) {
+export function SubscriptionButton({ plan, userName, userEmail }: Props) {
   const [loading, setLoading] = useState(false);
 
   const { data: session } = authClient.useSession();
@@ -32,12 +32,10 @@ export function EnrollmentButton({ plan, userName, userEmail }: Props) {
       const loaded = await loadScript();
       if (!loaded) throw new Error("Razorpay SDK failed to load");
 
-      // 1. Create order via server action
-      console.log("handleSubscribe", userId, plan);
       const { orderId, amount, currency, keyId } =
         await createSubscriptionOrder(plan, userId);
 
-      // 2. Open Razorpay checkout
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const rzp = new (window as any).Razorpay({
         key: keyId,
         amount,
