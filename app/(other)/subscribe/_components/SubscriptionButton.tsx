@@ -7,6 +7,8 @@ import {
   verifyAndActivateSubscription,
 } from "@/app/actions/payment.actions";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface Props {
   plan: "MONTHLY" | "YEARLY";
@@ -15,6 +17,7 @@ interface Props {
 }
 
 export function SubscriptionButton({ plan, userName, userEmail }: Props) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const { data: session } = authClient.useSession();
@@ -53,9 +56,10 @@ export function SubscriptionButton({ plan, userName, userEmail }: Props) {
         }) => {
           try {
             await verifyAndActivateSubscription(response, userId);
-            alert("Subscription activated! 🎉");
+            toast.success("Payment successfull!!");
+            router.push("/dashboard");
           } catch {
-            alert("Payment verification failed. Contact support.");
+            toast.error("Something went wrong.");
           }
         },
 
