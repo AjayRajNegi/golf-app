@@ -103,8 +103,8 @@ model Subscription {
   id                    String             @id @default(cuid())
   plan                  Plan
   status                SubStatus          @default(PENDING)
-  stripeCustomerId      String?
-  stripeSubscriptionId  String?
+  razorpayOrderId       String?
+  razorpaySubscriptionId String?
   currentPeriodEnd      DateTime?
   cancelledAt           DateTime?
 
