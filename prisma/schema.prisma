@@ -1,7 +1,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../app/generated/prisma"
+  output   = "../prisma/generated/prisma"
 }
 
 datasource db {
@@ -9,9 +9,9 @@ datasource db {
 }
 
 model User {
-  id            String    @unique
+  id            String    @id @default(cuid())
   name          String
-  email         String
+  email         String    @unique
   emailVerified Boolean   @default(false)
   image         String?
   createdAt     DateTime  @default(now())
@@ -19,12 +19,18 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  subscription      Subscription?
+  scores            Score[]
+  userCharity       UserCharity?
+  charityContribs   CharityContribution[]  
+  drawEntries       DrawEntry[]
+  winnerClaims      WinnerClaim[]
+
   role       String?
   banned     Boolean?  @default(false)
   banReason  String?
   banExpires DateTime?
 
-  @@unique([email])
   @@map("user")
 }
 
@@ -76,4 +82,179 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+enum Role {
+  SUBSCRIBER
+  ADMIN
+}
+enum Plan {
+  MONTHLY 
+  YEARLY
+}
+enum SubStatus {
+  PENDING 
+  ACTIVE 
+  LAPSED 
+  CANCELLED
+}
+
+model Subscription {
+  id                    String             @id @default(cuid())
+  plan                  Plan
+  status                SubStatus          @default(PENDING)
+  stripeCustomerId      String?
+  stripeSubscriptionId  String?
+  currentPeriodEnd      DateTime?
+  cancelledAt           DateTime?
+
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+  
+  userId                String             @unique
+  user                  User               @relation(fields: [userId], references: [id])
+
+  @@map("subscription")
+}
+
+model Score {
+  id        String   @id @default(cuid())
+  value     Int      
+  date      DateTime @db.Date
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+  @@map("score")
+}
+
+model Charity {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  imageUrl    String?
+  website     String?
+  featured    Boolean  @default(false)
+  active      Boolean  @default(true)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userCharities       UserCharity[]
+  charityContribs     CharityContribution[]
+
+  @@map("charity")
+}
+
+model UserCharity {
+  id                   String   @id @default(cuid())
+  contributionPercent  Int      @default(10) 
+
+  updatedAt            DateTime @updatedAt
+
+  userId               String   @unique
+  user                 User     @relation(fields: [userId], references: [id])
+  charityId            String
+  charity              Charity  @relation(fields: [charityId], references: [id])
+
+  @@map("userCharity")
+}
+
+model CharityContribution {
+  id        String   @id @default(cuid())
+  amount    Float
+  cycle     DateTime 
+
+  createdAt DateTime @default(now())
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  charityId String
+  charity   Charity  @relation(fields: [charityId], references: [id])
+
+  @@map("charityContribs")
+}
+
+model Draw {
+  id               String      @id @default(cuid())
+  month            DateTime    @db.Date 
+  status           DrawStatus  @default(DRAFT)
+  drawnNumbers     Int[]
+  totalPool        Float       @default(0)
+  jackpotPool      Float       @default(0) 
+  drawType         DrawType    @default(RANDOM)
+  publishedAt      DateTime?
+  
+  createdAt        DateTime    @default(now())
+
+  entries          DrawEntry[]
+  @@map("draw")
+}
+
+enum DrawStatus {
+  DRAFT 
+  SIMULATED 
+  PUBLISHED
+}
+enum DrawType { 
+  RANDOM 
+  ALGORITHMIC 
+}
+
+model DrawEntry {
+  id          String   @id @default(cuid())
+  scores      Int[]    
+  matchCount  Int
+  tier        MatchTier?
+  prizeAmount Float    @default(0)
+  
+  createdAt   DateTime @default(now())
+
+  drawId      String
+  draw        Draw     @relation(fields: [drawId], references: [id])
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  winnerClaims WinnerClaim[]
+  @@unique([drawId, userId])
+  @@map("drawEntry")
+}
+
+enum MatchTier { 
+  MATCH_3 
+  MATCH_4 
+  MATCH_5 
+}
+
+model WinnerClaim {
+  id           String      @id @default(cuid())
+  
+  proofUrl     String?
+  status       ClaimStatus @default(PENDING_UPLOAD)
+  adminNote    String?
+  reviewedAt   DateTime?
+  paidAt       DateTime?
+  
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  drawEntryId  String
+  drawEntry    DrawEntry   @relation(fields: [drawEntryId], references: [id])
+  userId       String
+  user         User        @relation(fields: [userId], references: [id])
+
+  @@map("winnerClaim")
+}
+
+enum ClaimStatus {
+  PENDING_UPLOAD
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  PAID
 }

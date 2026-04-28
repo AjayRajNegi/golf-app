@@ -84,6 +84,7 @@ export async function loginWithEmailAction(
     const result = await auth.api.signInEmail({
       body: { email, password },
       headers: await headers(),
+      asResponse: true,
     });
 
     if (!result) {

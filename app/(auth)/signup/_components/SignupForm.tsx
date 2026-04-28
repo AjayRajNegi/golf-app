@@ -15,7 +15,6 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { useState, useTransition } from "react";
 import { Loader, Loader2, Send } from "lucide-react";
-import { signUpWithEmailAction } from "@/app/actions/auth.actions";
 
 export default function SignupForm() {
   const router = useRouter();
@@ -34,6 +33,7 @@ export default function SignupForm() {
         fetchOptions: {
           onSuccess: () => {
             toast.success("Signed in with Github, you will be redirected...");
+            router.push("/");
           },
           onError: () => {
             toast.error("Internal server error.");
@@ -44,15 +44,20 @@ export default function SignupForm() {
   }
   function signUpWithEmail() {
     startEmailTransition(async () => {
-      const result = await signUpWithEmailAction(name, email, password);
-
-      if (!result.success) {
-        toast.error(result.error);
-        return;
-      }
-
-      toast.success(result.message);
-      router.push("/");
+      await authClient.signUp.email({
+        name,
+        email,
+        password,
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("Signed in with Email, you will be redirected...");
+            router.push("/");
+          },
+          onError: () => {
+            toast.error("Error verifying Email.");
+          },
+        },
+      });
     });
   }
   return (

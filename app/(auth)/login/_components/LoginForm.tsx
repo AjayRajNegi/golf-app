@@ -15,7 +15,6 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { useState, useTransition } from "react";
 import { Loader, Loader2, Send } from "lucide-react";
-import { loginWithEmailAction } from "@/app/actions/auth.actions";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -33,6 +32,7 @@ export default function LoginForm() {
         fetchOptions: {
           onSuccess: () => {
             toast.success("Signed in with Github, you will be redirected...");
+            router.push("/");
           },
           onError: () => {
             toast.error("Internal server error.");
@@ -41,19 +41,25 @@ export default function LoginForm() {
       });
     });
   }
+
   function signInWithEmail() {
     startEmailTransition(async () => {
-      const result = await loginWithEmailAction(email, password);
-
-      if (!result.success) {
-        toast.error(result.error);
-        return;
-      }
-
-      toast.success(result.message);
-      router.push("/");
+      await authClient.signIn.email({
+        email,
+        password,
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("Login successfull.");
+            router.push("/");
+          },
+          onError: () => {
+            toast.error("Error verifying Email/Password.");
+          },
+        },
+      });
     });
   }
+
   return (
     <Card>
       <CardHeader>
