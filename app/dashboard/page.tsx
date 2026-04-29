@@ -16,6 +16,7 @@ import prisma from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { QuickAddDialog } from "./_components/QuickAddDialog";
+import { ScoreDialog } from "./_components/ScoreDialog";
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -151,12 +152,13 @@ export default async function DashboardPage() {
                 Your activity, impact, and draw status in one place
               </p>
             </div>
-            <Link href="/dashboard/scores">
+            {/* <Link href="/dashboard/scores">
               <Button className="bg-[#F6C177] text-black hover:bg-[#f1b55d] rounded-full">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Score
               </Button>
-            </Link>
+            </Link> */}
+            <ScoreDialog userId={userId} />
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
