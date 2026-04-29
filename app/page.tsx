@@ -27,6 +27,9 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import HowItWorks from "./(public)/_components/HowItWorks";
+import Charities from "./(public)/_components/Charities";
+import Pricing from "./(public)/_components/Pricing";
+import Results from "./(public)/_components/Results";
 
 const stats = [
   { label: "Total donated", value: "£248,900", icon: Heart },
@@ -57,55 +60,6 @@ const charities = [
     accent: "Fast-growing partner",
   },
 ];
-
-const pricing = [
-  {
-    name: "Monthly",
-    price: "£12",
-    note: "Flexible entry point",
-    highlight: false,
-    features: [
-      "1 monthly draw entry",
-      "Choose any charity",
-      "Score tracking dashboard",
-    ],
-  },
-  {
-    name: "Yearly",
-    price: "£120",
-    note: "Best value for committed members",
-    highlight: true,
-    features: [
-      "2 months free",
-      "Priority draw reminders",
-      "Best visibility in impact totals",
-    ],
-  },
-];
-
-function SectionHeading({
-  eyebrow,
-  title,
-  description,
-}: {
-  eyebrow: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="max-w-2xl">
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-white/55">
-        {eyebrow}
-      </p>
-      <h2 className="text-3xl font-semibold tracking-tight text-white md:text-4xl">
-        {title}
-      </h2>
-      <p className="mt-4 text-sm leading-7 text-white/68 md:text-base">
-        {description}
-      </p>
-    </div>
-  );
-}
 
 function StatCard({
   label,
@@ -431,149 +385,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section
-        id="pricing"
-        className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8"
-      >
-        <SectionHeading
-          eyebrow="Pricing"
-          title="Two plans, one clear next step"
-          description="The plan cards should feel premium and decisive, with one subtle emphasis on the best-value choice."
-        />
-
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
-          {pricing.map((plan) => (
-            <Card
-              key={plan.name}
-              className={
-                plan.highlight
-                  ? "border-[#F6C177]/30 bg-[#F6C177]/10 text-white shadow-2xl shadow-[#F6C177]/10"
-                  : "border-white/10 bg-white/[0.04] text-white shadow-xl shadow-black/10"
-              }
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  {plan.highlight && (
-                    <Badge className="rounded-full bg-white text-black hover:bg-white">
-                      Best value
-                    </Badge>
-                  )}
-                </div>
-                <CardDescription
-                  className={plan.highlight ? "text-white/70" : "text-white/60"}
-                >
-                  {plan.note}
-                </CardDescription>
-                <div className="pt-4">
-                  <p className="text-5xl font-semibold tracking-tight">
-                    {plan.price}
-                  </p>
-                  <p className="mt-2 text-sm text-white/55">
-                    per month equivalent
-                  </p>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-3 p-6 pt-0">
-                {plan.features.map((feature) => (
-                  <div
-                    key={feature}
-                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/20 p-3"
-                  >
-                    <BadgeCheck className="h-4 w-4 text-[#F6C177]" />
-                    <span className="text-sm text-white/72">{feature}</span>
-                  </div>
-                ))}
-                <Button
-                  className={
-                    plan.highlight
-                      ? "mt-3 w-full rounded-full bg-white text-black hover:bg-white/90"
-                      : "mt-3 w-full rounded-full bg-[#F6C177] text-black hover:bg-[#f1b55d]"
-                  }
-                >
-                  Choose {plan.name.toLowerCase()}
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="results"
-        className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8"
-      >
-        <Card className="overflow-hidden border-white/10 bg-white/[0.04] text-white shadow-2xl shadow-black/10">
-          <CardContent className="grid gap-10 p-8 lg:grid-cols-[0.95fr_1.05fr] lg:p-10">
-            <div>
-              <Badge className="rounded-full bg-white/10 text-white hover:bg-white/10">
-                Social proof
-              </Badge>
-              <h2 className="mt-5 text-3xl font-semibold tracking-tight">
-                Designed to feel premium, trusted, and emotionally clear.
-              </h2>
-              <p className="mt-4 max-w-xl text-sm leading-7 text-white/68">
-                The visual system combines editorial typography, warm contrast,
-                rounded cards, and subtle motion so the product feels like a
-                modern membership experience rather than a standard sports app.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2 text-sm text-white/55">
-                <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1">
-                  Mobile-first
-                </span>
-                <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1">
-                  Shadcn-ready
-                </span>
-                <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1">
-                  Charity-first
-                </span>
-                <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1">
-                  Not golf-cliché
-                </span>
-              </div>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                {
-                  title: "Member trust",
-                  value:
-                    "Verification flows and payout clarity are surfaced early.",
-                  icon: ShieldCheck,
-                },
-                {
-                  title: "Emotional hook",
-                  value:
-                    "The charity story carries the conversion, not golf imagery.",
-                  icon: Heart,
-                },
-                {
-                  title: "Engagement engine",
-                  value:
-                    "Rolling scores and monthly draws create repeat visits.",
-                  icon: TrendingUp,
-                },
-                {
-                  title: "Premium feel",
-                  value: "Dark luxury palette with warm highlight accents.",
-                  icon: Star,
-                },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-3xl border border-white/10 bg-black/20 p-4"
-                >
-                  <item.icon className="h-5 w-5 text-[#F6C177]" />
-                  <h3 className="mt-4 font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/62">
-                    {item.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+      <Pricing className="" />
+      <Results />
 
       <footer className="border-t border-white/10 bg-black/30">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
