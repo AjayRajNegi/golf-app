@@ -1,31 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import prisma from "@/lib/db";
+import Link from "next/link";
 
-const charities = [
-  {
-    name: "Green Future Trust",
-    blurb:
-      "Funding community-led environmental projects with measurable local impact.",
-    impact: "£84,200 raised",
-    accent: "From 10% contribution",
-  },
-  {
-    name: "Mindful Youth UK",
-    blurb:
-      "Supporting accessible mental health resources for young people and families.",
-    impact: "£61,750 raised",
-    accent: "Member favourite",
-  },
-  {
-    name: "Food For All Network",
-    blurb:
-      "Turning subscription energy into food relief, kitchens, and emergency support.",
-    impact: "£102,950 raised",
-    accent: "Fast-growing partner",
-  },
-];
+export default async function Charities({ className }: { className: string }) {
+  const charities = await prisma.charity.findMany({
+    where: { active: true },
+    include: {
+      charityContribs: {
+        select: {
+          amount: true,
+          charityId: true,
+        },
+      },
+    },
+  });
 
-export default function Charities({ className }: { className: string }) {
   return (
     <div className={`${className} bg-[#0B0B0C] text-white`}>
       <div className="relative overflow-hidden">
@@ -52,18 +42,27 @@ export default function Charities({ className }: { className: string }) {
               <Card key={charity.name} className="bg-white/5 border-white/10">
                 <CardContent className="p-6">
                   <h3 className="text-lg font-semibold">{charity.name}</h3>
-                  <p className="mt-2 text-sm text-white/65">{charity.blurb}</p>
+                  <p className="mt-2 text-sm text-white/65">
+                    {charity.description}
+                  </p>
 
                   <div className="mt-4 flex items-center justify-between text-sm">
-                    <span className="text-white/50">{charity.accent}</span>
+                    <span className="text-white/50">{}</span>
                     <span className="text-white font-medium">
-                      {charity.impact}
+                      ₹{" "}
+                      {charity.charityContribs
+                        .filter((contrib) => contrib.charityId === charity.id)
+                        .map((contrib) => contrib.amount)}{" "}
+                      raised
                     </span>
                   </div>
 
-                  <Button className="mt-5 w-full rounded-full bg-[#F6C177] text-black">
+                  <Link
+                    href={`charities/${charity.id}`}
+                    className="mt-5 w-full rounded-full bg-[#F6C177] text-black"
+                  >
                     View charity
-                  </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}

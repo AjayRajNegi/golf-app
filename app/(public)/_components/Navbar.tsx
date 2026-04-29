@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Menu, X } from "lucide-react";
+import Link from "next/link";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,31 +28,34 @@ export default function Navbar() {
 
         {/* Navigation Links */}
         <nav className="flex items-center gap-8 text-sm text-white/70">
-          <a href="#how-it-works" className="transition hover:text-white">
+          <Link href="/how-it-works" className="transition hover:text-white">
             How it works
-          </a>
-          <a href="#charities" className="transition hover:text-white">
+          </Link>
+          <Link href="/charities" className="transition hover:text-white">
             Charities
-          </a>
-          <a href="#pricing" className="transition hover:text-white">
+          </Link>
+          <Link href="/pricing" className="transition hover:text-white">
             Pricing
-          </a>
-          <a href="#results" className="transition hover:text-white">
+          </Link>
+          <Link href="/results" className="transition hover:text-white">
             Results
-          </a>
+          </Link>
         </nav>
 
         {/* Auth Buttons */}
         <div className="flex items-center gap-3">
-          <Button
-            variant="ghost"
+          <Link
+            href="/login"
             className="text-white hover:bg-white/8 hover:text-white"
           >
             Log in
-          </Button>
-          <Button className="rounded-full bg-white px-5 text-black hover:bg-white/90">
+          </Link>
+          <Link
+            href="/signup"
+            className="rounded-full bg-white px-5 text-black hover:bg-white/90"
+          >
             Start your journey
-          </Button>
+          </Link>
         </div>
       </div>
 
@@ -91,59 +95,58 @@ export default function Navbar() {
           <div className="absolute right-4 top-20 w-[calc(100vw-2rem)] max-w-[320px] rounded-2xl border border-white/10 bg-[#1a1a1a]/98 p-4 shadow-xl backdrop-blur-3xl">
             <ul className="space-y-2">
               <li>
-                <a
-                  href="#how-it-works"
+                <Link
+                  href="/how-it-works"
                   onClick={closeMobileMenu}
                   className="block py-2 text-base font-medium text-white/70 transition hover:text-white"
                 >
                   How it works
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#charities"
+                <Link
+                  href="/charities"
                   onClick={closeMobileMenu}
                   className="block py-2 text-base font-medium text-white/70 transition hover:text-white"
                 >
                   Charities
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#pricing"
+                <Link
+                  href="/pricing"
                   onClick={closeMobileMenu}
                   className="block py-2 text-base font-medium text-white/70 transition hover:text-white"
                 >
                   Pricing
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#results"
+                <Link
+                  href="/results"
                   onClick={closeMobileMenu}
                   className="block py-2 text-base font-medium text-white/70 transition hover:text-white"
                 >
                   Results
-                </a>
+                </Link>
               </li>
             </ul>
 
             <div className="my-3 h-px w-full bg-white/10" />
 
             <div className="flex flex-col gap-2 pt-2">
-              <Button
-                variant="ghost"
+              <Link
+                href="/login"
                 className="w-full justify-center text-white hover:bg-white/8 hover:text-white"
-                onClick={closeMobileMenu}
               >
                 Log in
-              </Button>
-              <Button
+              </Link>
+              <Link
+                href="/signup"
                 className="w-full justify-center rounded-full bg-white px-5 text-black hover:bg-white/90"
-                onClick={closeMobileMenu}
               >
                 Start your journey
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
