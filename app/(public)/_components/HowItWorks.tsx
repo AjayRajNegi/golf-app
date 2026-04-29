@@ -66,7 +66,7 @@ export default function HowItWorks() {
           >
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F6C177]/10 text-[#F6C177]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   <step.icon className="h-5 w-5" />
                 </div>
                 <span className="text-sm text-white/35">0{index + 1}</span>

@@ -24,7 +24,7 @@ export default function DrawsPage() {
                         Total pool: £30,000
                       </p>
                     </div>
-                    <Badge className="bg-[#F6C177]/10 text-[#F6C177]">
+                    <Badge className="bg-primary/10 text-primary">
                       Published
                     </Badge>
                   </div>
@@ -51,7 +51,7 @@ export default function DrawsPage() {
                         <p className="text-sm text-white/60 mt-1">
                           {tier.winner}
                         </p>
-                        <p className="mt-2 text-[#F6C177] font-semibold">
+                        <p className="mt-2 text-primary font-semibold">
                           {tier.prize}
                         </p>
                       </div>

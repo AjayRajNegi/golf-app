@@ -67,7 +67,7 @@ export default function Results() {
                 key={item.title}
                 className="rounded-3xl border border-white/10 bg-black/20 p-4"
               >
-                <item.icon className="h-5 w-5 text-[#F6C177]" />
+                <item.icon className="h-5 w-5 text-primary" />
                 <h3 className="mt-4 font-semibold">{item.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-white/62">
                   {item.value}

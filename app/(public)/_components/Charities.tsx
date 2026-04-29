@@ -59,7 +59,7 @@ export default async function Charities({ className }: { className: string }) {
 
                   <Link
                     href={`charities/${charity.id}`}
-                    className="mt-5 w-full rounded-full bg-[#F6C177] text-black"
+                    className="mt-5 w-full rounded-full bg-primary text-black"
                   >
                     View charity
                   </Link>

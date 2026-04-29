@@ -46,7 +46,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#0B0B0C] text-white">
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(246,193,119,0.18),_transparent_35%),radial-gradient(circle_at_top_right,_rgba(255,255,255,0.08),_transparent_30%),linear-gradient(to_bottom,_rgba(255,255,255,0.03),_transparent_28%)]" />
-        <div className="absolute left-1/2 top-[-8rem] h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-[#F6C177]/20 blur-3xl" />
+        <div className="absolute left-1/2 top-[-8rem] h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
 
         <Navbar />
         <Main />
@@ -88,11 +88,11 @@ export default function HomePage() {
                 >
                   <div className="flex items-center justify-between">
                     <p className="font-medium">{item.label}</p>
-                    <p className="text-sm text-[#F6C177]">{item.pct}</p>
+                    <p className="text-sm text-primary">{item.pct}</p>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-white/10">
                     <div
-                      className="h-full rounded-full bg-[#F6C177]"
+                      className="h-full rounded-full bg-primary"
                       style={{ width: item.pct }}
                     />
                   </div>
@@ -124,7 +124,7 @@ export default function HomePage() {
                             {charity.name}
                           </h3>
                           {index === 0 && (
-                            <Badge className="rounded-full bg-[#F6C177]/10 text-[#F6C177] hover:bg-[#F6C177]/10">
+                            <Badge className="rounded-full bg-primary/10 text-primary hover:bg-primary/10">
                               Featured
                             </Badge>
                           )}

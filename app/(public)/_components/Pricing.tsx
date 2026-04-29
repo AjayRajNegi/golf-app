@@ -76,7 +76,7 @@ export default function Pricing({ className }: { className: string }) {
               key={plan.name}
               className={
                 plan.highlight
-                  ? "border-[#F6C177]/30 bg-[#F6C177]/10 text-white shadow-2xl shadow-[#F6C177]/10"
+                  ? "border-primary/30 bg-primary/10 text-white shadow-2xl shadow-primary/10"
                   : "border-white/10 bg-white/[0.04] text-white shadow-xl shadow-black/10"
               }
             >
@@ -109,7 +109,7 @@ export default function Pricing({ className }: { className: string }) {
                     key={feature}
                     className="flex items-center gap-3 rounded-2xl border border-white/10 bg-black/20 p-3"
                   >
-                    <BadgeCheck className="h-4 w-4 text-[#F6C177]" />
+                    <BadgeCheck className="h-4 w-4 text-primary" />
                     <span className="text-sm text-white/72">{feature}</span>
                   </div>
                 ))}
@@ -117,7 +117,7 @@ export default function Pricing({ className }: { className: string }) {
                   className={
                     plan.highlight
                       ? "mt-3 w-full rounded-full bg-white text-black hover:bg-white/90"
-                      : "mt-3 w-full rounded-full bg-[#F6C177] text-black hover:bg-[#f1b55d]"
+                      : "mt-3 w-full rounded-full bg-primary text-black hover:bg-[#f1b55d]"
                   }
                 >
                   Choose {plan.name.toLowerCase()}

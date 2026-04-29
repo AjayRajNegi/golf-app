@@ -59,7 +59,7 @@ export default async function CharityContentPage({
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0C] via-black/60 to-transparent" />
 
           <div className="absolute bottom-6 left-1/2 w-full max-w-6xl -translate-x-1/2 px-4">
-            <Badge className="bg-[#F6C177]/10 text-[#F6C177] mb-3">
+            <Badge className="bg-primary/10 text-primary mb-3">
               Charity Partner
             </Badge>
             <h1 className="text-3xl md:text-5xl font-semibold tracking-tight">
@@ -83,7 +83,7 @@ export default async function CharityContentPage({
                   <a
                     href={charity.website}
                     target="_blank"
-                    className="inline-flex items-center mt-6 text-[#F6C177] text-sm"
+                    className="inline-flex items-center mt-6 text-primary text-sm"
                   >
                     Visit official website
                     <ExternalLink className="ml-2 h-4 w-4" />
@@ -97,7 +97,7 @@ export default async function CharityContentPage({
               <Card className="bg-white/5 border-white/10">
                 <CardContent className="p-6">
                   <p className="text-sm text-white/60">Total raised</p>
-                  <p className="mt-2 text-3xl font-semibold text-[#F6C177]">
+                  <p className="mt-2 text-3xl font-semibold text-primary">
                     £{totalRaised.toLocaleString()}
                   </p>
                   <p className="mt-2 text-sm text-white/60">
@@ -131,7 +131,7 @@ export default async function CharityContentPage({
                       className="flex items-center justify-between border border-white/10 rounded-xl p-3"
                     >
                       <div className="flex items-center gap-3">
-                        <Heart className="h-4 w-4 text-[#F6C177]" />
+                        <Heart className="h-4 w-4 text-primary" />
                         <span className="text-sm text-white/70">
                           Contribution
                         </span>
@@ -153,7 +153,7 @@ export default async function CharityContentPage({
                   Choose this charity and set your contribution percentage.
                 </p>
 
-                <Button className="mt-6 w-full bg-[#F6C177] text-black hover:bg-[#f1b55d]">
+                <Button className="mt-6 w-full bg-primary text-black hover:bg-[#f1b55d]">
                   Select this charity
                 </Button>
 

@@ -38,7 +38,7 @@ function StatCard({
     <Card className="border-white/10 bg-white/5 text-white shadow-2xl shadow-black/20 backdrop-blur-md ">
       <CardContent className="flex items-center gap-4 p-5">
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/8">
-          <Icon className="h-5 w-5 text-[#F6C177]" />
+          <Icon className="h-5 w-5 text-primary" />
         </div>
         <div>
           <p className="text-sm text-white/60">{label}</p>
@@ -54,7 +54,7 @@ export default function Main() {
     <main className="relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-24 lg:pt-10 mt-15">
       <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
         <div>
-          <Badge className="mb-6 rounded-full border border-[#F6C177]/25 bg-[#F6C177]/10 px-4 py-1.5 text-[#F6C177] hover:bg-[#F6C177]/10">
+          <Badge className="mb-6 rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-primary hover:bg-primary/10">
             <BadgeCheck className="mr-2 h-4 w-4" />A more meaningful way to
             compete
           </Badge>
@@ -66,7 +66,7 @@ export default function Main() {
             className="max-w-3xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl"
           >
             Play golf.
-            <span className="block text-[#F6C177]">Support a cause.</span>
+            <span className="block text-primary">Support a cause.</span>
             Win with purpose.
           </motion.h1>
 
@@ -79,7 +79,7 @@ export default function Main() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button
               size="lg"
-              className="rounded-full bg-[#F6C177] px-7 text-black hover:bg-[#f1b55d]"
+              className="rounded-full bg-primary px-7 text-black hover:bg-[#f1b55d]"
             >
               Start your journey
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -126,7 +126,7 @@ export default function Main() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-3xl border border-white/10 bg-black/20 p-4">
                   <p className="text-sm text-white/50">Current jackpot</p>
-                  <p className="mt-2 text-3xl font-semibold tracking-tight">
+                  <p className="mt-2 text-3xl font-semibold tracking-tight text-secondary">
                     £31,250
                   </p>
                   <p className="mt-2 text-sm text-white/60">
@@ -135,7 +135,7 @@ export default function Main() {
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-black/20 p-4">
                   <p className="text-sm text-white/50">Charity share</p>
-                  <p className="mt-2 text-3xl font-semibold tracking-tight">
+                  <p className="mt-2 text-3xl font-semibold tracking-tight text-secondary">
                     10%+
                   </p>
                   <p className="mt-2 text-sm text-white/60">
@@ -146,7 +146,9 @@ export default function Main() {
 
               <div className="rounded-3xl border border-white/10 bg-black/20 p-4">
                 <div className="mb-3 flex items-center justify-between">
-                  <p className="font-medium">Rolling score window</p>
+                  <p className="font-medium text-secondary">
+                    Rolling score window
+                  </p>
                   <Badge
                     variant="secondary"
                     className="rounded-full bg-white/10 text-white hover:bg-white/10"
@@ -158,12 +160,14 @@ export default function Main() {
                   {[39, 41, 37, 45, 42].map((score, index) => (
                     <div
                       key={index}
-                      className="rounded-2xl border border-white/10 bg-white/5 p-3 text-center"
+                      className="rounded-2xl border border-white/10 bg-white/5 p-3 text-center "
                     >
-                      <p className="text-[11px] uppercase tracking-[0.25em] text-white/45">
+                      <p className="text-[11px] uppercase tracking-[0.25em] text-white/45 ">
                         D{index + 1}
                       </p>
-                      <p className="mt-2 text-xl font-semibold">{score}</p>
+                      <p className="mt-2 text-xl font-semibold text-secondary">
+                        {score}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -172,14 +176,16 @@ export default function Main() {
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="rounded-3xl border border-white/10 bg-black/20 p-4">
                   <p className="text-sm text-white/50">Selected charity</p>
-                  <p className="mt-2 text-lg font-semibold">Mindful Youth UK</p>
+                  <p className="mt-2 text-lg font-semibold text-secondary">
+                    Mindful Youth UK
+                  </p>
                   <p className="mt-1 text-sm text-white/60">
                     Contribution set to 18% of membership.
                   </p>
                 </div>
                 <div className="rounded-3xl border border-white/10 bg-black/20 p-4">
                   <p className="text-sm text-white/50">Draw status</p>
-                  <p className="mt-2 text-lg font-semibold">
+                  <p className="mt-2 text-lg font-semibold text-secondary">
                     Eligible this month
                   </p>
                   <p className="mt-1 text-sm text-white/60">

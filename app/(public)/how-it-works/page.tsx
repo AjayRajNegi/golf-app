@@ -27,7 +27,7 @@ export default function HowItWorksPage() {
                 >
                   <CardContent className="p-5">
                     <p className="text-lg font-semibold">{item.tier}</p>
-                    <p className="text-[#F6C177] mt-2">{item.pct}</p>
+                    <p className="text-primary mt-2">{item.pct}</p>
                     <p className="text-sm text-white/60 mt-2">{item.note}</p>
                   </CardContent>
                 </Card>

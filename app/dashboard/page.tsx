@@ -92,6 +92,7 @@ export default async function DashboardPage() {
   };
 
   const scores = result.scores;
+  console.log(result.drawEntries);
 
   const currentDraw = {
     status: "Eligible",
@@ -139,7 +140,7 @@ export default async function DashboardPage() {
               </div>
             </div>
             {subscription.status === "lapsed" && (
-              <Button className="bg-[#F6C177] text-black hover:bg-[#f1b55d] rounded-full">
+              <Button className="bg-primary text-black hover:bg-[#f1b55d] rounded-full">
                 Renew Now
               </Button>
             )}
@@ -153,7 +154,7 @@ export default async function DashboardPage() {
               </p>
             </div>
             {/* <Link href="/dashboard/scores">
-              <Button className="bg-[#F6C177] text-black hover:bg-[#f1b55d] rounded-full">
+              <Button className="bg-primary text-black hover:bg-[#f1b55d] rounded-full">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Score
               </Button>
@@ -215,7 +216,7 @@ export default async function DashboardPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-[#F6C177] hover:text-[#f1b55d]"
+                        className="text-primary hover:text-[#f1b55d]"
                       >
                         View details
                         <ExternalLink className="ml-1 h-3.5 w-3.5" />
@@ -266,7 +267,7 @@ export default async function DashboardPage() {
                   <div className="mt-4 grid gap-4 md:grid-cols-2">
                     <div className="rounded-xl border border-white/10 bg-black/20 p-4">
                       <p className="text-sm text-white/60">Total won</p>
-                      <p className="mt-1 text-2xl font-semibold text-[#F6C177]">
+                      <p className="mt-1 text-2xl font-semibold text-primary">
                         £{winningsTotal.toLocaleString()}
                       </p>
                     </div>
@@ -307,7 +308,7 @@ export default async function DashboardPage() {
                           <p className="text-sm text-white/60">{w.match}</p>
                         </div>
                         <div className="text-right">
-                          <p className="font-semibold text-[#F6C177]">
+                          <p className="font-semibold text-primary">
                             {w.prize}
                           </p>
                           <p className="text-xs text-white/50">{w.status}</p>
@@ -318,7 +319,7 @@ export default async function DashboardPage() {
 
                   <Link
                     href="/dashboard/winnings"
-                    className="mt-4 inline-flex items-center text-sm text-[#F6C177] hover:underline"
+                    className="mt-4 inline-flex items-center text-sm text-primary hover:underline"
                   >
                     View all winnings
                     <ChevronRight className="ml-1 h-4 w-4" />
@@ -344,7 +345,7 @@ export default async function DashboardPage() {
                     className="mt-4 w-full border-white/10 bg-white/5 text-white"
                     //asChild
                   >
-                    <Link href="/dashboard/billing">Manage billing</Link>
+                    <Link href="/coming-soon">Manage billing</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -372,7 +373,7 @@ export default async function DashboardPage() {
               <Card className="bg-white/5 border-white/10">
                 <CardContent className="p-6">
                   <h3 className="font-semibold">Your Impact</h3>
-                  <p className="mt-2 text-3xl font-semibold text-[#F6C177]">
+                  <p className="mt-2 text-3xl font-semibold text-primary">
                     £128
                   </p>
                   <p className="text-sm text-white/60">Total contributed</p>
