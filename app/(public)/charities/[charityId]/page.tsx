@@ -48,7 +48,7 @@ export default async function CharityContentPage({
       <Navbar />
       <div className="min-h-screen bg-[#0B0B0C] text-white pt-10">
         {/* HERO */}
-        <div className="relative h-[320px] w-full overflow-hidden">
+        <div className="relative h-[340px] w-full overflow-hidden">
           {charity.imageUrl && (
             <img
               src={charity.imageUrl}
