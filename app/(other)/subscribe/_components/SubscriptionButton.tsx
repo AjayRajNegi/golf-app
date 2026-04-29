@@ -10,6 +10,7 @@ import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { createUserCharityWhileSignup } from "@/app/actions/charity.actions";
+import { cn } from "@/lib/utils";
 
 interface Props {
   plan: "MONTHLY" | "YEARLY";
@@ -91,12 +92,18 @@ export function SubscriptionButton({
       setLoading(false);
     }
   };
+  const isYearly = false;
 
   return (
     <button
       onClick={handleSubscribe}
       disabled={loading}
-      className="rounded-lg bg-indigo-600 px-6 py-3 text-white font-semibold hover:bg-indigo-700 disabled:opacity-50"
+      className={cn(
+        "w-full py-2.5 rounded-lg text-sm font-semibold font-[var(--font-sans)] transition-all duration-150",
+        isYearly
+          ? "bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 active:scale-[0.98]"
+          : "bg-transparent border border-[var(--border)] text-[var(--foreground)] hover:border-[var(--primary)] hover:text-[var(--primary)] active:scale-[0.98]",
+      )}
     >
       {loading ? "Processing..." : `Subscribe ${plan}`}
     </button>
